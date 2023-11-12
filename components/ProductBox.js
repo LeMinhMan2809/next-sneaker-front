@@ -1,4 +1,4 @@
-export default function ProductBox({_id, title, description, price}) {
+export default function ProductBox({ _id, title, description, price }) {
     return (
         <div>
             {title}
