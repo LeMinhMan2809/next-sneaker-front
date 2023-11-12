@@ -1,10 +1,13 @@
+import Carousel from "@/components/Carousel"
 import Header from "@/components/Header"
-import Featured from "@/components/Featured"
+import Navbar from "@/components/Navbar"
 
 export default function Home() {
   return (
     <div>
       <Header/>
+      <Navbar/>
+      <Carousel/>
     </div>
   )
 }
