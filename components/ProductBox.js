@@ -1,8 +1,8 @@
-export default function ProductBox({ _id, title, description, price }) {
+export default function ProductBox({ _id, title, description, price, images }) {
     return (
         <div className="bg-white">
             <div className="flex justify-center">
-                <img className="h-[250px]" src={images[0]}></img>
+                <img className="h-[250px]" src={images[0]}/>
             </div>
 
             <div className="text-center pt-8 pb-5 text-xl">
