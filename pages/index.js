@@ -12,7 +12,7 @@ export default function Home({ featuredProduct, newProducts }) {
       <Header />
       <Navbar />
       <Featured product={featuredProduct} />
-      <NewProduct products={newProducts} />
+      {/* <NewProduct products={newProducts} /> */}
     </div>
   )
 }
