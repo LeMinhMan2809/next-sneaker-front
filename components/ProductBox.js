@@ -1,13 +1,4 @@
-// import { useContext } from "react"
-// import { CartContext } from "./CartContext"
-
-export default function ProductBox({_id, title, brand, description, images}) {
-
-    // function addProductToCart (){
-    //    const {setCartProducts} = useContext(CartContext)
-    // }
-
-
+export default function ProductBox({ _id, title, description, price }) {
     return (
         <div className="bg-white">
             <div className="flex justify-center">

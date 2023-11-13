@@ -1,4 +1,4 @@
-const { Schema, default: mongoose } = require("mongoose");
+const { Schema, model, models, default: mongoose } = require("mongoose")
 
 const InventorySchema = new Schema({
     product: { type: mongoose.Types.ObjectId, ref: 'Product' },
@@ -8,4 +8,4 @@ const InventorySchema = new Schema({
     timestamps: true,
 })
 
-export default mongoose.models.Inventory || mongoose.model("Inventory", InventorySchema); 
+export const Inventory = models.Inventory || model("Inventory", InventorySchema); 
