@@ -1,7 +1,6 @@
 import mongoose, { model, Schema, models } from "mongoose"
 
 const ProductSchema = new Schema({
-    brand: { type: String, required: true },
     title: { type: String, required: true },
     description: String,
     images: [{ type: String }],

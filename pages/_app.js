@@ -3,9 +3,9 @@ import '@/styles/globals.css'
 
 export default function App({ Component, pageProps }) {
   return (
-    // <CartContextProvider>
-        
-    // </CartContextProvider>
-    <Component {...pageProps} />
+    <CartContextProvider>
+        <Component {...pageProps} />
+    </CartContextProvider>
+    
     )
 }

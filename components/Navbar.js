@@ -4,14 +4,14 @@ export default function Navbar() {
         <div className="mt-4 bg-black p-3 mb-4">
                 <nav>
                     <ul className="flex text-white justify-center items-center">
+                        
                         <li className="">
-                            <a href="">Trang chủ</a>
+                            <Link href="/">Trang chủ</Link>
                         </li>
                         <li className="">
                             <Link href="/nike">
                                 Nike
                             </Link>
-                            
                         </li>
                         <li className="">
                             <a href="">Adidas</a>

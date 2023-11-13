@@ -1,6 +1,14 @@
+import { useContext } from "react";
 import Center from "./Center";
+import { CartContext } from "./CartContext";
 
 export default function Featured({ product }) {
+    const {setCartProducts} = useContext(CartContext);
+
+    function addFeaturedToCart() {
+        setCartProducts(prev => [...prev, product._id]);
+    }
+
     return (
         <div className="bg-[#222] text-white py-10">
             <Center>
@@ -8,7 +16,7 @@ export default function Featured({ product }) {
                     <div className="pl-20 pt-[150px] justify-center items-center ">
                         <h1 className="text-4xl font-semibold">Super Pro</h1>
                         <p className="text-2xl">dasssssssssdasda</p>
-                        <button className="mt-3 p-3 font-semibold bg-green-300 rounded-xl">Mua ngay</button>
+                        <button onClick={addFeaturedToCart} className="mt-3 p-3 font-semibold bg-green-300 rounded-xl">Mua ngay</button>
                     </div>
 
                     <div className="flex items-center justify-center">
