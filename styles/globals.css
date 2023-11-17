@@ -59,3 +59,16 @@ nav ul li {
     font-size: larger;
     font-weight: 700;
 }
+
+/* Cart page */
+.cart_table {
+    width: 100%;
+}
+
+.cart_table th {
+    text-align: left;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-bottom: 10px;
+    /* font-size: ; */
+}

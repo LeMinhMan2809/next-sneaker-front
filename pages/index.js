@@ -13,7 +13,7 @@ export default function Home({ featuredProduct, newProducts }) {
     <div>
       <Header />
       <Navbar />
-      <Featured product={featuredProduct.product} />
+      <Featured inventory={featuredProduct.product} />
       <NewProduct products={newProducts} />
     </div>
   )

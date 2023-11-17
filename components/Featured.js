@@ -2,11 +2,11 @@ import { useContext } from "react";
 import Center from "./Center";
 import { CartContext } from "./CartContext";
 
-export default function Featured({ product }) {
+export default function Featured({ inventory }) {
     const {setCartProducts} = useContext(CartContext);
 
     function addFeaturedToCart() {
-        setCartProducts(prev => [...prev, product._id]);
+        setCartProducts(prev => [...prev, inventory._id]);
     }
 
     return (
