@@ -7,14 +7,22 @@ import axios from "axios"
 export default function CartPage (){
     const {cartProducts} = useContext(CartContext)
     const [inventory, setInventory] = useState([])
+    const [inventoryIds, setInventoryIds] = useState([])
     useEffect (()=>{
         if (cartProducts.length > 0) {
-            axios.post('/api/cart',{ids:cartProducts})
-            .then(response => {
-                setInventory(response.data)
-            })
+            for (let i=0; i<cartProducts.length; i++) {
+                console.log(cartProducts[0].id)
+                let id = cartProducts[i].id
+                setInventoryIds(prev => [...prev, id])
+               
+            }
+                console.log(inventoryIds)
+            // axios.post('/api/cart',{ids:cartProducts})
+            // .then(response => {
+            //     setInventory(response.data)
+            // })
         }
-    })
+    }, [])
 
     return (
         <>  

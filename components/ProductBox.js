@@ -2,11 +2,10 @@ import { useContext } from "react"
 import { CartContext } from "./CartContext"
 import { useRouter } from "next/router"
 
-export default function ProductBox({ InventoryId, _id, title, description, price, images, size  }) {
-    console.log(InventoryId)
+export default function ProductBox({ InventoryID, _id, title, description, price, images, size  }) {
     const router = useRouter()
     function handleProductDetail(){
-        router.push(`/inventory/${InventoryId}`)
+        router.push(`/inventory/${InventoryID}`)
     }
 
     return (
@@ -16,10 +15,8 @@ export default function ProductBox({ InventoryId, _id, title, description, price
             </div>
 
             <div className="text-center pt-8 pb-5 text-xl">
-                <p className="font-bold">{title}</p>
-                {size.map((s, index) => (
-                    <p key={index} className="font-extralight text-red-500 pt-2s">{price} đ</p>
-                ))}
+                <p className="font-bold">{title}</p>               
+                <p className="font-extralight text-red-500 pt-2s">{price} đ</p>               
                 <button onClick = {handleProductDetail} className="py-2 px-4 border-2 mt-3 border-black rounded-lg hover:bg-slate-200" >
                     Chi tiết
                 </button>

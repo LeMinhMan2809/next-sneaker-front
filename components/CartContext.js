@@ -15,9 +15,10 @@ export function CartContextProvider ({children}){
             setCartProducts(JSON.parse(ls.getItem('cart')));
         }
     }, [])
-    function addProduct (productID) {
-        setCartProducts(prev => [...prev, productID]);
+    function addProduct (productID, size) {
+        setCartProducts(prev => [...prev, { productID, size }]);
     }
+
     return (
         <CartContext.Provider value = {{cartProducts, setCartProducts, addProduct}}>
             {children}

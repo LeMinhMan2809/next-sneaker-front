@@ -5,7 +5,6 @@ const InventorySchema = new Schema({
     totalQuantity: { type: Number, required: true },
     price: { type: Number, required: true },
     size: [{ type: Object }],
-    price: { type: Number, required: true },
 }, {
     timestamps: true,
 })
