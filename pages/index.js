@@ -7,6 +7,7 @@ import mongooseConnect from "@/lib/mongoose"
 import { Setting } from "@/models/Setting"
 import { Inventory } from "@/models/Inventory"
 import { Product } from "@/models/Product"
+import Footer from "@/components/Footer"
 
 export default function Home({ featuredProduct, newProducts }) {
   return (
@@ -15,6 +16,7 @@ export default function Home({ featuredProduct, newProducts }) {
       <Navbar />
       <Featured inventory={featuredProduct.product} />
       <NewProduct products={newProducts} />
+      <Footer />
     </div>
   )
 }
