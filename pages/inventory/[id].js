@@ -14,8 +14,20 @@ export default function ProductPage ({inventory}){
     const [size, setSize] = useState('')
     const {setCartProducts} = useContext(CartContext);
 
+    function selectSize () {
+        var size = document.getElementById('wrap')
+        var btn = document.getElementsByClassName('btn')
+        for (var i = 0; i < btn.length; i++) {
+            btn[i].addEventListener('click', function () {
+                var current = document.getElementsByClassName('active')
+                current[0].classList.remove('active')
+                this.className += ' active'
+            })
+        }
+    }
+
     useEffect (() => {
-        console.log(inventory)
+        console.log(size)
     },[size])
     function addToCart () {
         console.log('Hi')
@@ -42,8 +54,8 @@ export default function ProductPage ({inventory}){
                             </div>
                             <div className="flex gap-5 mt-5">
                                 {inventory.size.map((s, index) => (
-                                    <div key={index} className="border-2 w-fit px-4 py-3">
-                                        <button onClick={ev => setSize(s)}>{s.name}</button>
+                                    <div id="wrap " key={index} className="border-2 w-fit px-4 py-3">
+                                        <button className="btn active" onClick={ev => { setSize(s) ; selectSize()}}>{s.name}</button>
                                     </div>
                                 ))}
                             </div>

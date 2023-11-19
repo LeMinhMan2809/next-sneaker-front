@@ -7,6 +7,7 @@ import axios from "axios"
 export default function CartPage() {
     const { cartProducts, addProduct } = useContext(CartContext)
     const [inventory, setInventory] = useState([])
+    // console.log(cartProducts)
     useEffect(() => {
         if (cartProducts.length > 0) {
             axios.post('/api/cart', cartProducts)
