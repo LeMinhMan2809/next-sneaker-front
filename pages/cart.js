@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { CartContext } from "@/components/CartContext"
 import axios from "axios"
 export default function CartPage() {
-    const { cartProducts } = useContext(CartContext)
+    const { cartProducts, addProduct } = useContext(CartContext)
     const [inventory, setInventory] = useState([])
     useEffect(() => {
         if (cartProducts.length > 0) {
@@ -16,6 +16,10 @@ export default function CartPage() {
         }
     }, [cartProducts])
 
+
+    function moreOfThisProduct(id) {
+        addProduct(id)
+    }
 
     return (
         <>
@@ -46,10 +50,15 @@ export default function CartPage() {
                                             <tr key={index}>
                                                 <td>
                                                     <img className="h-[100px]" src={i.product.images[0]} />
-                                                    {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
+                                                    {/* {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length} */}
                                                 </td>
                                                 <td>{i.size.name}</td>
-                                                <td>{cartProducts.filter(id => id === i._id).length}</td>
+                                                <td>
+                                                    <button className="w-7 bg-gray-400 mr-2">-</button>
+                                                    {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
+                                                    <button onClick={() => moreOfThisProduct(i.id) } className="w-7 bg-gray-400 ml-2">+</button>
+                                                </td>
+                                                {/* <td>{cartProducts.filter(id => id === i._id}</td> */}
                                                 <td>{i.price}</td>
                                             </tr>
                                         ))}

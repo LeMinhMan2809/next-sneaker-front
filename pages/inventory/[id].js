@@ -35,7 +35,7 @@ export default function ProductPage ({inventory}){
                             <img className="h-[400px] w-[400px]" src={inventory.product.images[0]} />
                         </div>
 
-                        <div className="w-[800px] pl-[50px]">
+                        <div className="w-[45rem] pl-[50px]">
                             <h1 className="text-3xl font-semibold">{inventory.product.title}</h1>
                             <div>
                                 <p className="mt-5">{inventory.product.description}</p>
