@@ -18,8 +18,8 @@ export default function CartPage() {
     }, [cartProducts])
 
 
-    function moreOfThisProduct(id) {
-        addProduct(id)
+    function moreOfThisProduct(id, size) {
+        addProduct(id, size)
     }
 
     return (
@@ -57,7 +57,7 @@ export default function CartPage() {
                                                 <td>
                                                     <button className="w-7 bg-gray-400 mr-2">-</button>
                                                     {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
-                                                    <button onClick={() => moreOfThisProduct(i.id) } className="w-7 bg-gray-400 ml-2">+</button>
+                                                    <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
                                                 </td>
                                                 {/* <td>{cartProducts.filter(id => id === i._id}</td> */}
                                                 <td>{i.price}</td>
