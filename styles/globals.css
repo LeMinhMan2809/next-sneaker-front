@@ -77,4 +77,5 @@ nav ul li {
 #wrap .acitve {
     background-color: black;
     color: white;
+    padding: 10px;
 }

@@ -19,6 +19,7 @@ export default function ProductPage ({inventory}){
         var btn = document.getElementsByClassName('btn')
         for (var i = 0; i < btn.length; i++) {
             btn[i].addEventListener('click', function () {
+                console.log(btn[i])
                 var current = document.getElementsByClassName('active')
                 current[0].classList.remove('active')
                 this.className += ' active'
@@ -27,7 +28,7 @@ export default function ProductPage ({inventory}){
     }
 
     useEffect (() => {
-        console.log(size)
+        // console.log(size)
     },[size])
     function addToCart () {
         console.log('Hi')
