@@ -15,9 +15,6 @@ export default function CartPage() {
                     setInventory(response.data)
                 })
         }
-        else {
-            setInventory([])
-        }
     }, [cartProducts])
 
 
@@ -29,6 +26,7 @@ export default function CartPage() {
         removeProduct(id, size)
         console.log(cartProducts.length)
         if (cartProducts.length <= 1) {
+            setInventory([])
             localStorage.clear('cart')
             setInventory([])
         }
@@ -44,7 +42,7 @@ export default function CartPage() {
                     <div className="p-8 bg-slate-300 rounded-md">
 
                         <h2 className="text-3xl font-semibold mb-3">Thanh toán</h2>
-                        {!cartProducts.length && (
+                        {!inventory.length && (
                             <div>Giỏ hàng của bạn đang trống</div>
                         )}
                         {inventory.length > 0 && (
