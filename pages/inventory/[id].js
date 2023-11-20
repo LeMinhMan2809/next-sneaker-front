@@ -14,17 +14,17 @@ export default function ProductPage ({inventory}){
     const [size, setSize] = useState('')
     const {setCartProducts} = useContext(CartContext);
 
-    function selectSize () {
-        var size = document.getElementById('wrap')
-        var btn = document.getElementsByClassName('btn')
-        for (var i = 0; i < btn.length; i++) {
-            btn[i].addEventListener('click', function () {
-                var current = document.getElementsByClassName('active')
-                current[0].classList.remove('active')
-                this.className += ' active'
-            })
-        }
-    }
+    // function selectSize () {
+    //     var size = document.querySelector('#wrap')
+    //     var btn = document.querySelector('.btn')
+    //     for (var i = 0; i < btn.length; i++) {
+    //         btn[i].addEventListener('click', function () {
+    //             var current = document.querySelector('.active')
+    //             current[0].classList.remove('active')
+    //             this.className += ' active'
+    //         })
+    //     }
+    // }
 
     useEffect (() => {
         console.log(size)
@@ -53,11 +53,18 @@ export default function ProductPage ({inventory}){
                                 <p className="mt-5">{inventory.product.description}</p>
                             </div>
                             <div className="flex gap-5 mt-5">
-                                {inventory.size.map((s, index) => (
+                                <select>
+                                    {inventory.size.map((s, index) => (
+                                        <option key={index} value={s.name}>{s.name}</option>
+                                    ))}                                         
+                                </select>
+
+
+                                {/* {inventory.size.map((s, index) => (
                                     <div id="wrap " key={index} className="border-2 w-fit px-4 py-3">
                                         <button className="btn active" onClick={ev => { setSize(s) ; selectSize()}}>{s.name}</button>
                                     </div>
-                                ))}
+                                ))} */}
                             </div>
 
                             <div className="mt-5 w-[200px] text-white bg-red-500 py-2 px-5 text-center rounded-2xl hover:bg-black ">
