@@ -5,8 +5,9 @@ import { useContext, useEffect, useState } from "react"
 import { CartContext } from "@/components/CartContext"
 import axios from "axios"
 export default function CartPage() {
-    const { cartProducts, addProduct } = useContext(CartContext)
+    const { cartProducts, addProduct, removeProduct } = useContext(CartContext)
     const [inventory, setInventory] = useState([])
+
     useEffect(() => {
         if (cartProducts.length > 0) {
             axios.post('/api/cart', cartProducts)
@@ -14,17 +15,24 @@ export default function CartPage() {
                     setInventory(response.data)
                 })
         }
+        else {
+            setInventory([])
+        }
     }, [cartProducts])
 
 
     function moreOfThisProduct(id, size) {
-        console.log(id, size)
         addProduct(id, size)
     }
 
-    function lessOfThisProduct (id, size) {
-        removeProduct (id, size)
+    function lessOfThisProduct(id, size) {
+        removeProduct(id, size)
+        console.log(cartProducts.length)
+        if (cartProducts.length <= 1) {
+            localStorage.clear('cart')
+        }
     }
+
     return (
         <>
             <Header />
@@ -38,7 +46,7 @@ export default function CartPage() {
                         {!cartProducts.length && (
                             <div>Giỏ hàng của bạn đang trống</div>
                         )}
-                        {inventory?.length > 0 && (
+                        {inventory.length > 0 && (
                             <table className="cart_table">
                                 <thead>
                                     <tr>
