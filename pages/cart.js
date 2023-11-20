@@ -22,6 +22,9 @@ export default function CartPage() {
         addProduct(id, size)
     }
 
+    function lessOfThisProduct (id, size) {
+        removeProduct (id, size)
+    }
     return (
         <>
             <Header />
@@ -55,7 +58,7 @@ export default function CartPage() {
                                                 </td>
                                                 <td>{i.size.name}</td>
                                                 <td>
-                                                    <button className="w-7 bg-gray-400 mr-2">-</button>
+                                                    <button onClick={() => lessOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 mr-2">-</button>
                                                     {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
                                                     <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
                                                 </td>
