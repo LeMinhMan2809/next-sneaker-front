@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react"
 import { CartContext } from "@/components/CartContext"
 import axios from "axios"
 export default function CartPage() {
-    const { cartProducts, addProduct } = useContext(CartContext)
+    const { cartProducts, addProduct, removeProduct } = useContext(CartContext)
     const [inventory, setInventory] = useState([])
     // console.log(cartProducts)
     useEffect(() => {
@@ -19,7 +19,12 @@ export default function CartPage() {
 
 
     function moreOfThisProduct(id, size) {
+        // console.log(size)
         addProduct(id, size)
+    }
+
+    function lessOfThisProduct (id, size) {
+        removeProduct(id, size)
     }
 
     return (
@@ -55,12 +60,12 @@ export default function CartPage() {
                                                 </td>
                                                 <td>{i.size.name}</td>
                                                 <td>
-                                                    <button className="w-7 bg-gray-400 mr-2">-</button>
+                                                    <button onClick={() => lessOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 mr-2">-</button>
                                                     {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
                                                     <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
                                                 </td>
                                                 {/* <td>{cartProducts.filter(id => id === i._id}</td> */}
-                                                <td>{i.price}</td>
+                                                <td>{cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length * i.price}</td>
                                             </tr>
                                         ))}
                                     </>
