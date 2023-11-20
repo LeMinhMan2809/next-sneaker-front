@@ -7,13 +7,19 @@ import axios from "axios"
 export default function CartPage() {
     const { cartProducts, addProduct, removeProduct } = useContext(CartContext)
     const [inventory, setInventory] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
+        setIsLoading(true)
         if (cartProducts.length > 0) {
             axios.post('/api/cart', cartProducts)
                 .then(response => {
                     setInventory(response.data)
+                    setIsLoading(false)
                 })
+        }
+        else {
+            setInventory([])
         }
     }, [cartProducts])
 
@@ -24,13 +30,16 @@ export default function CartPage() {
 
     function lessOfThisProduct(id, size) {
         removeProduct(id, size)
-        console.log(cartProducts.length)
         if (cartProducts.length <= 1) {
             setInventory([])
             localStorage.clear('cart')
             setInventory([])
         }
     }
+
+    useEffect(() => {
+        console.log(inventory)
+    }, [inventory])
 
     return (
         <>
@@ -42,10 +51,7 @@ export default function CartPage() {
                     <div className="p-8 bg-slate-300 rounded-md">
 
                         <h2 className="text-3xl font-semibold mb-3">Thanh toán</h2>
-                        {!inventory.length && (
-                            <div>Giỏ hàng của bạn đang trống</div>
-                        )}
-                        {inventory.length > 0 && (
+                        {inventory.length > 0 ? (
                             <table className="cart_table">
                                 <thead>
                                     <tr>
@@ -56,28 +62,29 @@ export default function CartPage() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <>
-                                        {inventory.map((i, index) => (
-                                            <tr key={index}>
-                                                <td>
-                                                    <img className="h-[100px]" src={i.product.images[0]} />
-                                                    {/* {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length} */}
-                                                </td>
-                                                <td>{i.size.name}</td>
-                                                <td>
-                                                    <button onClick={() => lessOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 mr-2">-</button>
-                                                    {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
-                                                    <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
-                                                </td>
-                                                {/* <td>{cartProducts.filter(id => id === i._id}</td> */}
-                                                <td>{i.price}</td>
-                                            </tr>
-                                        ))}
-                                    </>
-
+                                    {isLoading && (
+                                        <tr>
+                                            <td colSpan="4">Loading...</td>
+                                        </tr>
+                                    )}
+                                    {!isLoading && inventory.map((i, index) => (
+                                        <tr key={index}>
+                                            <td>
+                                                <img className="h-[100px]" src={i.product.images[0]} />
+                                                {/* {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length} */}
+                                            </td>
+                                            <td>{i.size.name}</td>
+                                            <td>
+                                                <button onClick={() => lessOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 mr-2">-</button>
+                                                {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
+                                                <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
+                                            </td>
+                                            <td>{i.price}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
-                        )}
+                        ) : null}
                     </div>
 
                     {!!cartProducts?.length && (
