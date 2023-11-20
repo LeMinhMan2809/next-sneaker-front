@@ -37,8 +37,17 @@ export default function CartPage() {
         }
     }
 
+    let total = 0
+    for (const inv of cartProducts) {
+        const price = inventory.find(i => i._id === inv.id)?.price || 0
+        total += price
+        // const price = inventory.find(i => i._id === inventoryId )?.product.price
+        // console.log(inventory.id)
+        // 
+    }
+
     useEffect(() => {
-        console.log(inventory)
+        // console.log(inventory)
     }, [inventory])
 
     return (
@@ -51,7 +60,7 @@ export default function CartPage() {
                     <div className="p-8 bg-slate-300 rounded-md">
 
                         <h2 className="text-3xl font-semibold mb-3">Thanh toán</h2>
-                        {inventory.length > 0 ? (
+                        {cartProducts.length > 0 ? (
                             <table className="cart_table">
                                 <thead>
                                     <tr>
@@ -70,6 +79,7 @@ export default function CartPage() {
                                     {!isLoading && inventory.map((i, index) => (
                                         <tr key={index}>
                                             <td>
+                                                {i.product._id}
                                                 <img className="h-[100px]" src={i.product.images[0]} />
                                                 {/* {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length} */}
                                             </td>
@@ -79,9 +89,14 @@ export default function CartPage() {
                                                 {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length}
                                                 <button onClick={() => moreOfThisProduct(i._id, i.size)} className="w-7 bg-gray-400 ml-2">+</button>
                                             </td>
-                                            <td>{i.price}</td>
+                                            <td>{(cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length * i.price).toLocaleString()}</td>
                                         </tr>
                                     ))}
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{total}</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         ) : null}
