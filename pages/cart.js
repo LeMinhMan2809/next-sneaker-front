@@ -10,7 +10,7 @@ export default function CartPage() {
     const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        setIsLoading(true)
+        setIsLoading(true);
         if (cartProducts.length > 0) {
             axios.post('/api/cart', cartProducts)
                 .then(response => {
@@ -31,24 +31,18 @@ export default function CartPage() {
     function lessOfThisProduct(id, size) {
         removeProduct(id, size)
         if (cartProducts.length <= 1) {
-            setInventory([])
             localStorage.clear('cart')
-            setInventory([])
         }
     }
 
     let total = 0
     for (const inv of cartProducts) {
-        const price = inventory.find(i => i._id === inv.id)?.price || 0
+        const price = inventory.find(i => i._id === inv.id && i.size.name === inv.size.name)?.price || 0
         total += price
         // const price = inventory.find(i => i._id === inventoryId )?.product.price
         // console.log(inventory.id)
         // 
     }
-
-    useEffect(() => {
-        // console.log(inventory)
-    }, [inventory])
 
     return (
         <>

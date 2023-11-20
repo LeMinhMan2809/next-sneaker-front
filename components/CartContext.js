@@ -16,12 +16,12 @@ export function CartContextProvider({ children }) {
         }
     }, [])
     function addProduct(productID, size) {
-        setCartProducts(prev => [...prev, { productID, size }]);
+        setCartProducts(prev => [...prev, { id: productID, size }]);
     }
 
     function removeProduct(inventoryId, size) {
         setCartProducts(prev => {
-            const pos = prev.findIndex(item => item.id === inventoryId && item.size.name === size.name)
+            const pos = prev.findIndex(item => item.id === inventoryId && item.size.name === size.name);
             if (pos !== -1) {
                 return prev.filter((value, index) => index !== pos)
             }
