@@ -30,6 +30,7 @@ export default function CartPage() {
         console.log(cartProducts.length)
         if (cartProducts.length <= 1) {
             localStorage.clear('cart')
+            setInventory([])
         }
     }
 
