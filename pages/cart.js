@@ -18,7 +18,7 @@ export default function CartPage() {
     useEffect(() => {
         setIsLoading(true);
         if (cartProducts.length > 0) {
-            axios.post('/api/cart', cartProducts)
+            axios.post('/api/cart', {ids: cartProducts})
                 .then(response => {
                     setInventory(response.data)
                     setIsLoading(false)
@@ -40,6 +40,16 @@ export default function CartPage() {
             localStorage.clear('cart')
         }
     }
+
+    async function goToPayment () {
+        const response = axios.post('/api/checkout', {
+            name, email, phone, address, cartProducts
+        })
+
+        if (response.data.url) {
+        window.location.href = response.data.url
+    }
+}
 
     let total = 0
     for (const inv of cartProducts) {
@@ -110,11 +120,11 @@ export default function CartPage() {
                     {!!cartProducts?.length && (
                         <div className="p-8 bg-slate-300 rounded-md">
                             <h2 className="text-2xl font-semibold mb-5">Thông tin đơn hàng</h2>
-                            <form method="post" action="/api/checkout">
-
+                            
                                 <div>
-                                    <input placeholder="Họ và tên" type="text" className="input_cart" value={name}
-                                    onChange={(e) => setName(e.target.value)} />
+                                    <input placeholder="Họ và tên" type="text" 
+                                           className="input_cart" value={name} name="name"
+                                           onChange={(e) => setName(e.target.value)} />
                                 </div>
 
                                 <div>
@@ -136,9 +146,8 @@ export default function CartPage() {
                                 
                                 {/* <input type="" name="products" value={cartProducts} /> */}
 
-                                <button className="py-2 px-5 mt-3 bg-green-400 text-white" type="submit">Tiếp tục thanh toán</button>
-                            </form>
-
+                                <button className="py-2 px-5 mt-3 bg-green-400 text-white" onClick={goToPayment}>Tiếp tục thanh toán</button>
+                        
                         </div>
                     )}
 

@@ -1,6 +1,7 @@
 import mongooseConnect from "@/lib/mongoose"
 import { Inventory } from "@/models/Inventory"
-
+import { Order } from "@/models/Order"
+const stripe = require('stripe')('sk_test_...');
 export default async function handler(req, res) {
     if (req.method !== 'POST'){
         res.json('Should be a POST request')
@@ -31,5 +32,12 @@ export default async function handler(req, res) {
         }
         
     }
-    res.json(line_items)
+
+    const orderDoc = await Order.create({
+        line_items, name, email, phone, address, paid:false,
+    })
+
+
+
+    // res.json(line_items)
 }
