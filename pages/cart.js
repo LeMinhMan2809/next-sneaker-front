@@ -9,6 +9,12 @@ export default function CartPage() {
     const [inventory, setInventory] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [phone, setPhone] = useState('')
+    const [address, setAddress] = useState('')
+
+
     useEffect(() => {
         setIsLoading(true);
         if (cartProducts.length > 0) {
@@ -53,7 +59,11 @@ export default function CartPage() {
 
                     <div className="p-8 bg-slate-300 rounded-md">
 
-                        <h2 className="text-3xl font-semibold mb-3">Thanh toán</h2>
+                        <h2 className="text-3xl font-semibold mb-5 text-center">Thanh toán</h2>
+                        {console.log(cartProducts)}
+                        {!cartProducts?.length && (
+                            <h1 className="text-1xl">Giỏ hàng đang trống</h1>
+                        )}
                         {cartProducts.length > 0 ? (
                             <table className="cart_table">
                                 <thead>
@@ -73,7 +83,7 @@ export default function CartPage() {
                                     {!isLoading && inventory.map((i, index) => (
                                         <tr key={index}>
                                             <td>
-                                                {i.product._id}
+                                                {/* {i.product._id} */}
                                                 <img className="h-[100px]" src={i.product.images[0]} />
                                                 {/* {i.product.title} : {cartProducts.filter(item => item._id === i.id && item.size.name === i.size.name).length} */}
                                             </td>
@@ -87,9 +97,10 @@ export default function CartPage() {
                                         </tr>
                                     ))}
                                     <tr>
+                                        <td className="mt-3">Tổng cộng:</td>
                                         <td></td>
                                         <td></td>
-                                        <td>{total}</td>
+                                        <td>{total.toLocaleString()}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -98,10 +109,36 @@ export default function CartPage() {
 
                     {!!cartProducts?.length && (
                         <div className="p-8 bg-slate-300 rounded-md">
-                            <h2 className="text-2xl font-semibold">Thông tin đơn hàng</h2>
-                            <input />
-                            <input />
-                            <button className="py-2 px-5 mt-3 bg-green-300 text-white">Tiếp tục mua hàng</button>
+                            <h2 className="text-2xl font-semibold mb-5">Thông tin đơn hàng</h2>
+                            <form method="post" action="/api/checkout">
+
+                                <div>
+                                    <input placeholder="Họ và tên" type="text" className="input_cart" value={name}
+                                    onChange={(e) => setName(e.target.value)} />
+                                </div>
+
+                                <div>
+                                    <input placeholder="Email" 
+                                           className="input_cart" value={email} name="email"
+                                           onChange={(e) => setEmail(e.target.value)}/>
+                                </div>
+
+                                <div>
+                                    <input placeholder="Địa chỉ" type="text" className="input_cart" 
+                                           value={address} name="address"
+                                           onChange={(e) => setAddress(e.target.value)}/>
+                                </div>
+
+                                <div>
+                                    <input placeholder="Số điện thoại" className="input_cart" 
+                                           value={phone} name="phone" onChange={(e) => setPhone(e.target.value)}/>
+                                </div>
+                                
+                                {/* <input type="" name="products" value={cartProducts} /> */}
+
+                                <button className="py-2 px-5 mt-3 bg-green-400 text-white" type="submit">Tiếp tục thanh toán</button>
+                            </form>
+
                         </div>
                     )}
 

@@ -79,3 +79,12 @@ nav ul li {
     color: white;
     padding: 10px;
 }
+
+/* Input Cart */
+.input_cart {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 0.6rem;
+    border-radius: 5px;
+}
