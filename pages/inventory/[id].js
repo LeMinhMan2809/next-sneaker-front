@@ -30,7 +30,6 @@ export default function ProductPage ({inventory}){
         console.log(size)
     },[size])
     function addToCart () {
-        console.log('Hi')
         const id = inventory._id
         setCartProducts(prev => [...prev, { id, size }]);
     }

@@ -14,7 +14,6 @@ export default function CartPage() {
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
 
-
     useEffect(() => {
         setIsLoading(true);
         if (cartProducts.length > 0) {
@@ -41,6 +40,16 @@ export default function CartPage() {
         }
     }
 
+    async function goToPayment () {
+        const response = axios.post('/api/checkout', {
+            name, email, phone, address, cartProducts
+        })
+
+    //   if (response.data.url) {
+    //   window.location.href = response.data.url
+    // }
+}
+
     let total = 0
     for (const inv of cartProducts) {
         const price = inventory.find(i => i._id === inv.id && i.size.name === inv.size.name)?.price || 0
@@ -60,7 +69,7 @@ export default function CartPage() {
                     <div className="p-8 bg-slate-300 rounded-md">
 
                         <h2 className="text-3xl font-semibold mb-5 text-center">Thanh toán</h2>
-                        {console.log(cartProducts)}
+                        {/* {console.log(cartProducts)} */}
                         {!cartProducts?.length && (
                             <h1 className="text-1xl">Giỏ hàng đang trống</h1>
                         )}
@@ -110,11 +119,11 @@ export default function CartPage() {
                     {!!cartProducts?.length && (
                         <div className="p-8 bg-slate-300 rounded-md">
                             <h2 className="text-2xl font-semibold mb-5">Thông tin đơn hàng</h2>
-                            <form method="post" action="/api/checkout">
-
+                            
                                 <div>
-                                    <input placeholder="Họ và tên" type="text" className="input_cart" value={name}
-                                    onChange={(e) => setName(e.target.value)} />
+                                    <input placeholder="Họ và tên" type="text" 
+                                           className="input_cart" value={name} name="name"
+                                           onChange={(e) => setName(e.target.value)} />
                                 </div>
 
                                 <div>
@@ -136,9 +145,8 @@ export default function CartPage() {
                                 
                                 {/* <input type="" name="products" value={cartProducts} /> */}
 
-                                <button className="py-2 px-5 mt-3 bg-green-400 text-white" type="submit">Tiếp tục thanh toán</button>
-                            </form>
-
+                                <button className="py-2 px-5 mt-3 bg-green-400 text-white" onClick={goToPayment}>Tiếp tục thanh toán</button>
+                        
                         </div>
                     )}
 
@@ -150,11 +158,7 @@ export default function CartPage() {
 
 
             </Center>
-
-
-
         </>
     )
-
 
 }
