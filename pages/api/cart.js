@@ -26,7 +26,6 @@ import { Product } from "@/models/Product"
 export default async function handle(req, res) {
     await mongooseConnect()
     const cartItems = req.body // assuming req.body is the array
-
     let result = [];
     for (let item of cartItems) {
         let inventoryItems = await Inventory.find({

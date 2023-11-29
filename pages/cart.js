@@ -14,11 +14,10 @@ export default function CartPage() {
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
 
-
     useEffect(() => {
         setIsLoading(true);
         if (cartProducts.length > 0) {
-            axios.post('/api/cart', {ids: cartProducts})
+            axios.post('/api/cart', cartProducts)
                 .then(response => {
                     setInventory(response.data)
                     setIsLoading(false)
@@ -46,9 +45,9 @@ export default function CartPage() {
             name, email, phone, address, cartProducts
         })
 
-        if (response.data.url) {
-        window.location.href = response.data.url
-    }
+    //   if (response.data.url) {
+    //   window.location.href = response.data.url
+    // }
 }
 
     let total = 0
@@ -70,7 +69,7 @@ export default function CartPage() {
                     <div className="p-8 bg-slate-300 rounded-md">
 
                         <h2 className="text-3xl font-semibold mb-5 text-center">Thanh toán</h2>
-                        {console.log(cartProducts)}
+                        {/* {console.log(cartProducts)} */}
                         {!cartProducts?.length && (
                             <h1 className="text-1xl">Giỏ hàng đang trống</h1>
                         )}
@@ -159,11 +158,7 @@ export default function CartPage() {
 
 
             </Center>
-
-
-
         </>
     )
-
 
 }
