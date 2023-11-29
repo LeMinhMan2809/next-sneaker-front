@@ -2,26 +2,6 @@ import mongooseConnect from "@/lib/mongoose"
 import { Inventory } from "@/models/Inventory"
 import { Product } from "@/models/Product"
 
-// export default async function handle(req, res) {
-//     await mongooseConnect()
-//     const cartItems = req.body // assuming req.body is the array
-
-//     let result = [];
-//     for (let item of cartItems) {
-//         let inventoryItem = await Inventory.findOne({
-//             _id: item.id,
-//             'size.name': item.size.name
-//         }).populate('product');
-
-//         if (inventoryItem) {
-//             const size = inventoryItem.size.find(s => s.name === item.size.name);
-//             // Overwrite the size array with the single size object
-//             const newItem = { ...inventoryItem._doc, size };
-//             result.push(newItem);
-//         }
-//     }
-//     res.json(result);
-// }
 
 export default async function handle(req, res) {
     await mongooseConnect()
