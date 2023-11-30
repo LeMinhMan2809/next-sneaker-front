@@ -19,10 +19,7 @@ export default function Navbar() {
                         <li className="">
                             <a href="">Converse</a>
                         </li>
-                        <li className="">
-                            <a href="">Khuyến mãi</a>
-                        </li>
-
+ 
                     </ul>
                 </nav>
             </div>

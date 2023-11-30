@@ -11,7 +11,7 @@ export default function ProductBox({ InventoryID, _id, title, description, price
     return (
         <div className="bg-white border-2 ml-5 mr-5">
             <div className="flex justify-center flex-wrap wrap-5">
-                <img className="h-[250px]" src={images[0]}/>
+                <img className="h-[250px]" src={images?.[0]}/>
             </div>
 
             <div className="text-center pt-8 pb-5 text-xl">
