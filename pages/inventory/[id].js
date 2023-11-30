@@ -6,24 +6,15 @@ import mongooseConnect from "@/lib/mongoose"
 import { useEffect, useState } from "react";
 import { CartContext } from "@/components/CartContext";
 import { useContext } from "react";
-import Center from "@/components/Center";
-
 
 
 export default function ProductPage ({inventory}){
     const [size, setSize] = useState('')
     const {setCartProducts} = useContext(CartContext);
+    const [selectedButton, setSelectedButton] = useState(null);
 
-    function selectSize () {
-        var size = document.querySelector('#wrap')
-        var btn = document.querySelector('.btn')
-        for (var i = 0; i < btn.length; i++) {
-            btn[i].addEventListener('click', function () {
-                var current = document.querySelector('.active')
-                current[0].classList.remove('active')
-                this.className += ' active'
-            })
-        }
+    const handleButtonClick = (index) => {
+        setSelectedButton(index);
     }
 
     useEffect (() => {
@@ -52,11 +43,11 @@ export default function ProductPage ({inventory}){
                                 <p className="mt-5">{inventory.product.description}</p>
                             </div>
                             <div className="flex gap-5 mt-5">
-
-
                                 {inventory.size.map((s, index) => (
-                                    <div id="wrap " key={index} className="border-2 w-fit px-4 py-3">
-                                        <button className="btn active" onClick={ev => { setSize(s) ; selectSize()}}>{s.name}</button>
+                                    <div id="wrap" key={index} className="border-2 w-fit">
+                                        <button className={`btn px-4 py-3 ${selectedButton === index ? "active" : ""}`}       
+                                                onClick={ev => { setSize(s) ; handleButtonClick(index)}}>{s.name}
+                                        </button>
                                     </div>
                                 ))}
                             </div>
@@ -66,22 +57,10 @@ export default function ProductPage ({inventory}){
                             </div>
                         </div>
 
-                        
-
-                    </div>
-                    
-                        
-                    
-
+                    </div>    
                 </div>
-
             </div>
-
-
-
-        </div>
-        
-
+        </div>      
     )
 }
 

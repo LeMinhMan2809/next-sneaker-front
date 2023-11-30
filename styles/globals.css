@@ -74,10 +74,9 @@ nav ul li {
 }
 
 /* Toggle */
-#wrap .acitve {
+#wrap .btn.active {
     background-color: black;
     color: white;
-    padding: 10px;
 }
 
 /* Input Cart */
