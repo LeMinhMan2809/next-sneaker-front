@@ -1,5 +1,11 @@
+import mongooseConnect from "@/lib/mongoose"
+import { Category } from "@/models/Category"
 import Link from "next/link"
-export default function Navbar() {
+import { useEffect } from "react"
+export default function Navbar( {rootCategory} ) {
+    useEffect(() => {
+        console.log(rootCategory)
+    }, [rootCategory])
     return (
         <div className="mt-4 bg-black p-3 mb-4">
                 <nav>
@@ -24,4 +30,15 @@ export default function Navbar() {
                 </nav>
             </div>
     )
+}
+
+export async function getServerSideProps() {
+  await mongooseConnect()
+  const rootCategory = await Category.find({ parent: null })
+  console.log(rootCategory)
+  return {
+    props: {
+      rootCategory: JSON.parse(JSON.stringify(rootCategory)),
+    },
+  }
 }
