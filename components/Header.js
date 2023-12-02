@@ -1,19 +1,27 @@
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CartContext } from "./CartContext";
 
-export default function Header() {
-    const {cartProducts} = useContext(CartContext)
-    
+export default function Header({ setSearchText }) {
+    const { cartProducts } = useContext(CartContext)
+    const [search, setSearch] = useState('')
+
     const settings = {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 5,
-      slidesToScroll:1
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 5,
+        slidesToScroll: 1
     }
+
+    useEffect(() => {
+        if (typeof setSearchText === 'function') {
+            setSearchText(search);
+        }
+    }, [search])
+
     return (
         <div>
             <div className="header">
@@ -23,15 +31,15 @@ export default function Header() {
                     </div>
 
                     <div className="flex justify-center">
-                        
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" 
+
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
                             className="items-center w-5 h-5 relative top-[14px] left-[280px]">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                         </svg>
-                        
-                        <input className="p-2 border-[3px] rounded-xl w-[300px] " type="text" placeholder="Tìm kiếm..."></input>
+
+                        <input className="p-2 border-[3px] rounded-xl w-[300px] " type="text" placeholder="Tìm kiếm..." onChange={ev => setSearch(ev.target.value)}></input>
                     </div>
-                    
+
                     <div className="flex">
                         {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
@@ -85,7 +93,7 @@ export default function Header() {
                         </Slider>                     
                     </div>         
             </div> */}
-        
+
         </div>
     )
 }

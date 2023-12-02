@@ -8,21 +8,17 @@ import { Setting } from "@/models/Setting"
 import { Inventory } from "@/models/Inventory"
 import { Product } from "@/models/Product"
 import Footer from "@/components/Footer"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Home({ featuredProduct, newProducts }) {
 
   const [searchText, setSearchText] = useState('')
 
-
-
-
-
   return (
     <div>
-      <Header />
+      <Header setSearchText={setSearchText} />
       <Navbar />
-      <Featured inventory={featuredProduct.product} />
+      {!searchText && <Featured inventory={featuredProduct.product} />}
       <NewProduct products={newProducts} />
       <Footer />
     </div>
