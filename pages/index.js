@@ -8,8 +8,16 @@ import { Setting } from "@/models/Setting"
 import { Inventory } from "@/models/Inventory"
 import { Product } from "@/models/Product"
 import Footer from "@/components/Footer"
+import { useState } from "react";
 
 export default function Home({ featuredProduct, newProducts }) {
+
+  const [searchText, setSearchText] = useState('')
+
+
+
+
+
   return (
     <div>
       <Header />
