@@ -1,10 +1,11 @@
 import Link from "next/link"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import axios from "axios"
 export default function Navbar() {
+    const [rootCategory, setRootCategory] = useState([])
     useEffect(() => {
         axios.get('/api/category').then(response => {
-            console.log(response.data)
+            setRootCategory(response.data)
         })
     }, [])
     return (
@@ -15,17 +16,12 @@ export default function Navbar() {
                     <li className="">
                         <Link href="/">Trang chủ</Link>
                     </li>
-                    <li className="">
-                        <Link href="/nike">
-                            Nike
-                        </Link>
-                    </li>
-                    <li className="">
-                        <a href="">Adidas</a>
-                    </li>
-                    <li className="">
-                        <a href="">Converse</a>
-                    </li>
+                    {rootCategory.map((r, index) => (
+                        <li key={index} className="ml-4">
+                            <Link href={`/category/${r._id}`}>{r.name}</Link>
+                        </li>
+                    ))}
+                    
 
                 </ul>
             </nav>
