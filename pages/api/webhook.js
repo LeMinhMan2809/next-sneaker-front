@@ -35,7 +35,7 @@ export default async function handler(req, res) {
             let pid = []
             for (let i = 0; i < li.line_items.length; i++) {
                 pid.push({
-                    _id: li.line_items[i].price_data.product_data._id.toString(),
+                    inventoryId: li.line_items[i].price_data.product_data.inventoryId.toString(),
                     sizeName: li.line_items[i].price_data.product_data.description.toString(),
                     quantity: li.line_items[i].quantity,
                 })
