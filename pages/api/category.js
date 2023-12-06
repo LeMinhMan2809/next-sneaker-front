@@ -6,9 +6,9 @@ export default async function handle(req, res) {
     if (req.method === 'GET') {
         if(req.query.id) {
             const category = await Category.findById(req.query.id)
-            res.json(category)
+            return res.json(category)           
         }
         const categories = await Category.find({ parent: null })
-        res.json(categories)
+        return res.json(categories)
     }
 }

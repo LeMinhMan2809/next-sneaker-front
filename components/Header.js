@@ -3,7 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Link from "next/link";
 import { useContext, useState, useEffect } from "react";
 import { CartContext } from "./CartContext";
-
+import { useRouter } from "next/router";
 export default function Header({ setSearchText }) {
     const { cartProducts } = useContext(CartContext)
     const [search, setSearch] = useState('')

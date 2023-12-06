@@ -48,12 +48,11 @@ export default async function handler(req, res) {
         }
     }
 
-    const orderDoc = await Order.create({
-        line_items, name, email, phone, address, paid: false,
-    })
-
     const shippingFeeSetting = await Setting.findOne({ name: 'shippingFee' })
     const shippingFeeCents = parseInt(shippingFeeSetting.value || '0')
+    const orderDoc = await Order.create({
+        line_items, name, email, phone, address, shippingFee: shippingFeeCents, paid: false,
+    })
 
     const session = await stripe.checkout.sessions.create({
         line_items,

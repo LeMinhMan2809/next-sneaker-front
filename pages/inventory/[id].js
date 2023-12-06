@@ -19,6 +19,7 @@ export default function ProductPage ({inventory}){
 
     useEffect (() => {
         console.log(size)
+        console.log(inventory)
     },[size])
     function addToCart () {
         const id = inventory._id
@@ -31,7 +32,7 @@ export default function ProductPage ({inventory}){
             <Navbar/>
             
             <div>
-                <div className="mr-[150px] ml-[150px] px-4">
+                <div className="mr-[150px] ml-[170px] px-4">
                     <div className="flex items-center">
                         <div>
                             <img className="h-[400px] w-[400px]" src={inventory.product.images[0]} />
@@ -39,6 +40,7 @@ export default function ProductPage ({inventory}){
 
                         <div className="w-[45rem] pl-[50px]">
                             <h1 className="text-3xl font-semibold">{inventory.product.title}</h1>
+                            <p className="mt-[1rem] text-[#ee4721] font-semibold text-2xl">{(inventory.price).toLocaleString()} đ</p>
                             <div>
                                 <p className="mt-5">{inventory.product.description}</p>
                             </div>

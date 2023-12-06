@@ -23,7 +23,5 @@ export default function ProductBox({ InventoryID, _id, title, description, price
             </div>
             
         </div>
-           
-        
     )
 }
