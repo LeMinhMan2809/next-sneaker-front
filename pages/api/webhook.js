@@ -26,25 +26,28 @@ export default async function handler(req, res) {
             // Then define and call a function to handle the event payment_intent.succeeded
             const orderId = data.metadata.orderId
             const paid = data.payment_status === 'paid'
-            // if (orderId && paid) {
-            //     await Order.findByIdAndUpdate(orderId, {
-            //         paid: true,
-            //         discount_amount: data.total_details.amount_discount,
-            //     })
-            // }
-            // const li = await OrderDetail.findOne({ order: orderId })
-            // let pid = []
-            // for (let i = 0; i < li.line_items.length; i++) {
-            //     pid.push({
-            //         _id: li.line_items[i].price_data.product_data.description.toString(),
-            //         quantity: li.line_items[i].quantity,
-            //     })
-            // }
-            // for (let i = 0; i < pid.length; i++) {
-            //     await Inventory.updateOne({ _id: pid[i] }, {
-            //         $inc: { quantity: -pid[i].quantity }
-            //     })
-            // }
+            if (orderId && paid) {
+                await Order.findByIdAndUpdate(orderId, {
+                    paid: true,
+                })
+            }
+            const li = await OrderDetail.findOne({ order: orderId })
+            let pid = []
+            for (let i = 0; i < li.line_items.length; i++) {
+                pid.push({
+                    _id: li.line_items[i].price_data.product_data._id.toString(),
+                    sizeName: li.line_items[i].price_data.product_data.description.toString(),
+                    quantity: li.line_items[i].quantity,
+                })
+            }
+            for (let i = 0; i < pid.length; i++) {
+                await Inventory.updateOne({
+                    _id: pid[i]._id,
+                    'size.name': pid[i].sizeName // use size.name in your query
+                }, {
+                    $inc: { 'size.$.quantity': -pid[i].quantity } // decrease the quantity of the matching size
+                })
+            }
             break;
         // ... handle other event types
         default:

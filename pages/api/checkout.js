@@ -24,6 +24,7 @@ export default async function handler(req, res) {
         }).populate('product');
         return {
             ...item,
+            productId: productInfo.product._id,
             productTitle: productInfo.product.title,
             productPrice: productInfo.price
         };
@@ -39,6 +40,7 @@ export default async function handler(req, res) {
                 price_data: {
                     currency: 'VND',
                     product_data: {
+                        _id: productInfo.productId,
                         name: productInfo.productTitle,
                         description: productInfo.size.name,
                     },
