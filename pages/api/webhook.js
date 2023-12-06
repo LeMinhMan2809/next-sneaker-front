@@ -1,8 +1,8 @@
-import { mongooseConnect } from "@/lib/mongoose";
 import { Inventory } from "@/models/Inventory";
 import { Product } from "@/models/Product";
 import { Order } from "@/models/Order";
 import { buffer } from "micro";
+import mongooseConnect from "@/lib/mongoose";
 const stripe = require("stripe")(process.env.STRIPE_SK);
 
 const endpoint_secret = 'whsec_5786e08d5a6c0fb2fe4b6e26050adb8c338d0f467ddf021b5f2d1216abc65a9f'
