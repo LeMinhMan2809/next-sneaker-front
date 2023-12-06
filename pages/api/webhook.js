@@ -42,17 +42,19 @@ export default async function handler(req, res) {
             }
             for (let i = 0; i < pid.length; i++) {
                 await Inventory.updateOne({
-                    _id: pid[i]._id,
+                    _id: pid[i].inventoryId,
                     'size.name': pid[i].sizeName // use size.name in your query
                 }, {
                     $inc: { 'size.$.quantity': -pid[i].quantity } // decrease the quantity of the matching size
                 })
 
                 // Recalculate totalQuantity
-                const inventoryItem = await Inventory.findById(pid[i]._id);
+                const inventoryItem = await Inventory.findById(pid[i].inventoryId);
+                // console.log('p:' + pid[i].inventoryId);
+                // console.log('I:' + inventoryItem);
                 const totalQuantity = inventoryItem.size.reduce((total, size) => total + size.quantity, 0);
 
-                await Inventory.updateOne({ _id: pid[i]._id }, { totalQuantity });
+                await Inventory.updateOne({ _id: pid[i].inventoryId }, { totalQuantity });
             }
             break;
         // ... handle other event types
