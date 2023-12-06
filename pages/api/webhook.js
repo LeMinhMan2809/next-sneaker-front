@@ -47,6 +47,12 @@ export default async function handler(req, res) {
                 }, {
                     $inc: { 'size.$.quantity': -pid[i].quantity } // decrease the quantity of the matching size
                 })
+
+                // Recalculate totalQuantity
+                const inventoryItem = await Inventory.findById(pid[i]._id);
+                const totalQuantity = inventoryItem.size.reduce((total, size) => total + size.quantity, 0);
+
+                await Inventory.updateOne({ _id: pid[i]._id }, { totalQuantity });
             }
             break;
         // ... handle other event types
