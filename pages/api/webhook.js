@@ -31,7 +31,7 @@ export default async function handler(req, res) {
                     paid: true,
                 })
             }
-            const li = await OrderDetail.findOne({ order: orderId })
+            const li = await Order.findOne({ order: orderId })
             let pid = []
             for (let i = 0; i < li.line_items.length; i++) {
                 pid.push({
