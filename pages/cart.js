@@ -14,6 +14,10 @@ export default function CartPage() {
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
 
+    if (typeof window !== 'undefined' && window.location.search.includes('success=1')) {
+        localStorage.clear('cart')
+    }
+
     useEffect(() => {
         setIsLoading(true);
         if (cartProducts.length > 0) {
